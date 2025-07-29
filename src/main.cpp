@@ -618,7 +618,7 @@ int main(int, char**)
 
     // Create window with Vulkan context
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+Vulkan example", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "scribere", nullptr, nullptr);
     if (!glfwVulkanSupported())
     {
         printf("GLFW: Vulkan Not Supported\n");
@@ -688,7 +688,7 @@ int main(int, char**)
 
     // Load Texture
     MyTextureData my_texture;
-    bool ret = LoadTextureFromFile("../test.jpg", &my_texture);
+    bool ret = LoadTextureFromFile("../test.png", &my_texture);
     IM_ASSERT(ret);
 
     // Load Fonts
@@ -747,7 +747,7 @@ int main(int, char**)
             FPSOverlay(&show_overlay);
 
         {
-            ImGui::Begin("Chip View", nullptr, ImGuiWindowFlags_HorizontalScrollbar);
+            ImGui::Begin("Texture Window", nullptr, ImGuiWindowFlags_HorizontalScrollbar);
             ImGui::Image((ImTextureID)my_texture.DS, ImVec2(my_texture.Width, my_texture.Height));
             ImGui::End();
         }

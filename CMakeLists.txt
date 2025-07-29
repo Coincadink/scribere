@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(imgui-vulkan)
+project(scribere)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug CACHE STRING "" FORCE)
@@ -28,11 +28,15 @@ find_package(Vulkan REQUIRED)
 # use vulkan headers from glfw:
 include_directories(${GLFW_DIR}/deps)
 
+# STB
+set(STB_DIR ./deps/stb)
+include_directories(${STB_DIR})
+
 # Libraries
 set(LIBRARIES "glfw;Vulkan::Vulkan")
 
 # Create executable
 file(GLOB sources src/*.cpp)
 
-add_executable(imgui-vulkan ${sources} ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp ${IMGUI_DIR}/imgui.cpp ${IMGUI_DIR}/imgui_draw.cpp ${IMGUI_DIR}/imgui_demo.cpp ${IMGUI_DIR}/imgui_tables.cpp ${IMGUI_DIR}/imgui_widgets.cpp)
-target_link_libraries(imgui-vulkan ${LIBRARIES})
+add_executable(scribere ${sources} ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp ${IMGUI_DIR}/imgui.cpp ${IMGUI_DIR}/imgui_draw.cpp ${IMGUI_DIR}/imgui_demo.cpp ${IMGUI_DIR}/imgui_tables.cpp ${IMGUI_DIR}/imgui_widgets.cpp)
+target_link_libraries(scribere ${LIBRARIES})
