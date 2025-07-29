@@ -282,10 +282,11 @@ void RemoveTexture(MyTextureData* tex_data)
 {
     vkFreeMemory(g_Device, tex_data->UploadBufferMemory, nullptr);
     vkDestroyBuffer(g_Device, tex_data->UploadBuffer, nullptr);
-    vkDestroySampler(g_Device, tex_data->Sampler, nullptr);
+    vkDestroySampler(g_Device, tex_data->Sampler, nullptr); // ERRORING.
     vkDestroyImageView(g_Device, tex_data->ImageView, nullptr);
     vkDestroyImage(g_Device, tex_data->Image, nullptr);
     vkFreeMemory(g_Device, tex_data->ImageMemory, nullptr);
+    
     ImGui_ImplVulkan_RemoveTexture(tex_data->DS);
 }
 
@@ -777,10 +778,11 @@ int main(int, char**)
 
     // Cleanup
 
-    RemoveTexture(&my_texture);
-
     err = vkDeviceWaitIdle(g_Device);
     check_vk_result(err);
+    
+    RemoveTexture(&my_texture);
+    
     ImGui_ImplVulkan_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
